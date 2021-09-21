@@ -7,21 +7,21 @@ locals {
   // https://www.davidc.net/sites/default/subnets/subnets.html?network=10.0.0.0&mask=16&division=11.721
   subnets = cidrsubnets(var.cidr_block, 3, 3, 3, 3, 2, 2)
   subnets_public = {
-    for key, value in [local.subnets[0],local.subnets[1]] :
+    for key, value in [local.subnets[0], local.subnets[1]] :
     data.aws_availability_zones.available.zone_ids[key] => {
       availability_zone_id = data.aws_availability_zones.available.zone_ids[key]
       cidr_block           = value
     }
   }
   subnets_data = {
-    for key, value in [local.subnets[2],local.subnets[3]] :
+    for key, value in [local.subnets[2], local.subnets[3]] :
     data.aws_availability_zones.available.zone_ids[key] => {
       availability_zone_id = data.aws_availability_zones.available.zone_ids[key]
       cidr_block           = value
     }
   }
   subnets_app = {
-    for key, value in [local.subnets[4],local.subnets[5]] :
+    for key, value in [local.subnets[4], local.subnets[5]] :
     data.aws_availability_zones.available.zone_ids[key] => {
       availability_zone_id = data.aws_availability_zones.available.zone_ids[key]
       cidr_block           = value
@@ -139,7 +139,7 @@ resource "aws_route_table" "egress" {
 
   vpc_id = aws_vpc.main.id
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
   }
 

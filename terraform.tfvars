@@ -1,17 +1,17 @@
 region      = "eu-west-1"
 environment = "dev"
-code_repo   = "https://github.com/cloudandthings/learn-aws-setup-account"
-namespace   = "sec"
+code_repo   = "https://github.com/UberWaffe/terraform-aws-sample-deployment"
+namespace   = "infra"
 
 application_name = {
-  short = "iss",
-  long  = "iam-self-service"
+  short = "asd",
+  long  = "aws-sample-d"
 }
 
 nukeable = true
 
 client_name = {
-  short = "cat1",
+  short = "ct2",
   long  = "Cloudandthings"
 }
 

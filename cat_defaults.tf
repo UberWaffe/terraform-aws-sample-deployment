@@ -46,32 +46,8 @@ locals {
 
 locals {
   outputs = {
-    vpc_id = {
-      value  = aws_vpc.main.id
-      secure = false
-    }
-    subnets_public = {
-      value  = [for _, value in aws_subnet.public : value.id]
-      secure = false
-    }
+    test_out = "Hello"
   }
-}
-
-resource "aws_ssm_parameter" "outputs" {
-
-  for_each = local.outputs
-
-  name        = "/${local.naming_prefix}-output/${each.key}"
-  description = "Give other systems a handle on this code's outputs"
-
-  type   = each.value["secure"] ? "SecureString" : "String"
-  key_id = aws_kms_key.main.arn
-
-  value = jsonencode(each.value["value"])
-
-  tags = merge(local.mandatory_tags, {
-    Name = "${local.naming_prefix}-output-${each.key}"
-  })
 }
 
 // =============================

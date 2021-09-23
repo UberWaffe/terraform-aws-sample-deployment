@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "vpc_flow_logs" {
         "logs:DescribeLogStreams"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:logs:eu-west-1:353444730604:log-group:aws-controltower/CloudTrailLogs:*"
+      "Resource": "arn:aws:logs:eu-west-1:353444730604:log-group:learning-code-build:50e127b0-902f-445e-a4dd-0362062c2b3a"
     }
   ]
 }

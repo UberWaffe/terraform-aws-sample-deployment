@@ -40,11 +40,10 @@ resource "aws_iam_role_policy" "vpc_flow_logs" {
         "logs:CreateLogStream",
         "logs:PutLogEvents",
         "logs:DescribeLogGroups",
-        "logs:DescribeLogStreams",
-        "kms:*"
+        "logs:DescribeLogStreams"
       ],
       "Effect": "Allow",
-      "Resource": "*"
+      "Resource": "arn:aws:logs:eu-west-1:353444730604:log-group:aws-controltower/CloudTrailLogs:*"
     }
   ]
 }

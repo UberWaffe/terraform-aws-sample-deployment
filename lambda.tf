@@ -1,7 +1,7 @@
 data "archive_file" "main" {
   type        = "zip"
   source_dir  = "${path.module}/lambda"
-  output_path = "${path.module}/tmp/lambda.zip"
+  output_path = "${path.module}/artifacts/lambda.zip"
 }
 
 resource "aws_lambda_function" "test_peculiar_lambda" {

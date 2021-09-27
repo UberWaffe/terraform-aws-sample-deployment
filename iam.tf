@@ -19,6 +19,10 @@ resource "aws_iam_role" "iam_for_lambda" {
   ]
 }
 EOF
+
+  tags = {
+    Name = "${local.naming_prefix}-role"
+  }
 }
 
 resource "aws_iam_role_policy" "lambda_policy" {

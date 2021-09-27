@@ -14,7 +14,7 @@ resource "aws_lambda_function" "test_peculiar_lambda" {
   runtime          = "python3.8"
   environment {
     variables = {
-      par_naming_prefix           = local.naming_prefix
+      par_naming_prefix = local.naming_prefix
     }
   }
   layers      = []

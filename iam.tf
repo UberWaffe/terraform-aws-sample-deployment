@@ -1,51 +1,42 @@
 // ======================
-// VPC Flow logs
+// Test lambda
 // ======================
-resource "aws_iam_role" "vpc_flow_logs" {
-  name = "${local.naming_prefix}-vpc-flow-logs"
+resource "aws_iam_role" "iam_for_lambda" {
+  name = "${local.naming_prefix}-lambda-python-role"
 
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "",
-      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "vpc-flow-logs.amazonaws.com"
+        "Service": "lambda.amazonaws.com"
       },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-
-  tags = merge(local.mandatory_tags, {
-    Name = "${local.naming_prefix}-vpc-flow-logs"
-  })
-
-}
-
-resource "aws_iam_role_policy" "vpc_flow_logs" {
-  name = "${local.naming_prefix}-vpc-flow-logs"
-  role = aws_iam_role.vpc_flow_logs.id
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents",
-        "logs:DescribeLogGroups",
-        "logs:DescribeLogStreams"
-      ],
       "Effect": "Allow",
-      "Resource": "arn:aws:logs:eu-west-1:353444730604:log-group:learning-code-build:50e127b0-902f-445e-a4dd-0362062c2b3a"
+      "Sid": ""
     }
   ]
 }
 EOF
+}
+
+resource "aws_iam_role_policy" "lambda_policy" {
+  name = "${local.naming_prefix}-lambda-policy"
+  role = aws_iam_role.iam_for_lambda.id
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+        ],
+        "Resource" : "arn:aws:logs:*:*:*"
+      }
+    ]
+  })
 }

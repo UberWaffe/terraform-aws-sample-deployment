@@ -22,7 +22,7 @@ resource "aws_lambda_function" "test_peculiar_lambda" {
   timeout     = 30
 
   tracing_config = {
-      mode = "Active"
+    mode = "Active"
   }
 
   tags = {

@@ -21,6 +21,10 @@ resource "aws_lambda_function" "test_peculiar_lambda" {
   memory_size = 128
   timeout     = 30
 
+  tracing_config = {
+      mode = "Active"
+  }
+
   tags = {
     Name = "${local.naming_prefix}"
   }

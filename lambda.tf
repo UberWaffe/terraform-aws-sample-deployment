@@ -21,7 +21,7 @@ resource "aws_lambda_function" "test_peculiar_lambda" {
   memory_size = 128
   timeout     = 30
 
-  tracing_config = {
+  tracing_config {
     mode = "Active"
   }
 
